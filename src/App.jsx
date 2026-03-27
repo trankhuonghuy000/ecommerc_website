@@ -1,10 +1,31 @@
-function App() {
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
 
+import Home from "./pages/Homepage.jsx";
+import Checkout from "./pages/Checkout.jsx";
+import Auth from "./pages/Auth.jsx";
+import Navbar from "./components/Navbar.jsx";
+import ProductDetail from "./pages/ProdductDetail.jsx";
+
+import AuthProvider from "./Context/AuthContext.jsx";
+import CardProvider from "./Context/CardContext.jsx";
+
+function App() {
   return (
-    <>
-      <h1>App</h1>
-    </>
-  )
+    <AuthProvider>
+      <CardProvider>
+        <div className="app">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+          </Routes>
+        </div>
+      </CardProvider>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
